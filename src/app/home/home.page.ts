@@ -1,10 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule, NgFor, TitleCasePipe } from '@angular/common';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonThumbnail, IonLabel, IonButton } from '@ionic/angular/standalone';
 import { PokemonService } from '../services/pokemon.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonList,
+    IonItem,
+    IonThumbnail,
+    IonLabel,
+    IonButton,
+    NgFor,
+    TitleCasePipe
+  ],
 })
 export class HomePage implements OnInit {
   pokemons: any[] = [];
@@ -12,7 +30,7 @@ export class HomePage implements OnInit {
   limit = 20;
   loading = false;
 
-  constructor(private pokemonService: PokemonService) {}
+  constructor(private pokemonService: PokemonService, private router: Router) {}
 
   ngOnInit() {
     this.loadPokemons();
@@ -33,4 +51,7 @@ export class HomePage implements OnInit {
     return parts[parts.length - 2];
   }
 
+  openDetail(name: string) {
+    this.router.navigate(['/pokemon-detail', name]);
+  }
 }

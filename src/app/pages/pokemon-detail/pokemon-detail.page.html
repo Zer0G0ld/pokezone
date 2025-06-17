@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ pokemonData?.name | titlecase }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="pokemonData">
+  <ion-card>
+    <img [src]="pokemonData.sprites.front_default" alt="{{ pokemonData.name }}" />
+
+    <ion-card-header>
+      <ion-card-title>{{ pokemonData.name | titlecase }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>Altura: {{ pokemonData.height }}</p>
+      <p>Peso: {{ pokemonData.weight }}</p>
+      <p>Tipos:</p>
+      <ul>
+        <li *ngFor="let type of pokemonData.types">
+          {{ type.type.name | titlecase }}
+        </li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
